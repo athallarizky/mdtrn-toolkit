@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import { API_BASE_URL, DASHBOARD_BASE_URL } from "./config.js";
 
 const TOKEN = process.env.MDTRN_TOKEN || "";
 if (!TOKEN) {
@@ -49,7 +50,7 @@ function getPrefix(orderId: string): string {
 
 async function fetchPage(page: number): Promise<ApiResponse> {
   const response = await fetch(
-    "https://onedashboard.midtrans.com/api/notifications/search",
+    `${API_BASE_URL}/notifications/search`,
     {
       method: "POST",
       headers: {
@@ -57,9 +58,9 @@ async function fetchPage(page: number): Promise<ApiResponse> {
         "accept-language": "en-US,en;q=0.9",
         authorization: `Bearer ${TOKEN}`,
         "content-type": "application/json",
-        origin: "https://dashboard.midtrans.com",
+        origin: DASHBOARD_BASE_URL,
         priority: "u=1, i",
-        referer: "https://dashboard.midtrans.com/",
+        referer: `${DASHBOARD_BASE_URL}/`,
         "sec-ch-ua": '"Chromium";v="145", "Not:A-Brand";v="99"',
         "sec-ch-ua-mobile": "?0",
         "sec-ch-ua-platform": '"macOS"',

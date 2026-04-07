@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import { API_BASE_URL, DASHBOARD_BASE_URL } from "./config.js";
 
 const TOKEN = process.env.MDTRN_TOKEN || "";
 if (!TOKEN) {
@@ -31,7 +32,7 @@ interface RetryResult {
 
 async function retryNotification(notificationId: string): Promise<RetryResult> {
   try {
-    const url = `https://onedashboard.midtrans.com/api/notifications/${notificationId}/retry?type=${TYPE}&is_open_api=${IS_OPEN_API}`;
+    const url = `${API_BASE_URL}/notifications/${notificationId}/retry?type=${TYPE}&is_open_api=${IS_OPEN_API}`;
 
     const response = await fetch(url, {
       method: "PUT",
@@ -40,9 +41,9 @@ async function retryNotification(notificationId: string): Promise<RetryResult> {
         "accept-language": "en-US,en;q=0.9",
         authorization: `Bearer ${TOKEN}`,
         "content-length": "0",
-        origin: "https://dashboard.midtrans.com",
+        origin: DASHBOARD_BASE_URL,
         priority: "u=1, i",
-        referer: "https://dashboard.midtrans.com/",
+        referer: `${DASHBOARD_BASE_URL}/`,
         "sec-ch-ua": '"Chromium";v="145", "Not:A-Brand";v="99"',
         "sec-ch-ua-mobile": "?0",
         "sec-ch-ua-platform": '"macOS"',
