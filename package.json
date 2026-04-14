@@ -6,6 +6,10 @@
   "author": "",
   "type": "module",
   "main": "index.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-fetch": "^3.3.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }
